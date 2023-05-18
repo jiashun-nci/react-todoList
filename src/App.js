@@ -4,6 +4,7 @@ import React, { useState} from 'react'
 import Header from './Header'
 import TodoList from './TodoList'
 import data from './data.json'
+import TodoForm from './TodoForm';
 
 
 
@@ -28,6 +29,13 @@ function App() {
     setTodoList(filtered);
   }
 
+  // function to add new task
+  const addTask = (userInput) => {
+    let copy = [...todoList];
+    copy = [...copy, {"id": todoList.length + 1, "task": userInput, "complete": false}];
+    setTodoList(copy);
+  }
+
   return (
     <div className="App">
       {/* <h1>React App</h1> */}
@@ -40,7 +48,9 @@ function App() {
       ))} */}
 
       <Header />
+      <TodoForm addTask={addTask}/>
       <TodoList todoList={todoList} handleToggle={handleToggle} handleFilter={handleFilter} />
+      
     </div>
   );
 }
